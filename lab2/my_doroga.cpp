@@ -42,7 +42,7 @@ int main()
 
 		warpPerspective(frame, viev_above, trans_matrix, viev_above.size());
 		cvtColor(viev_above, Black_white_frame, CV_BGR2HSV);
-		inRange(Black_white_frame, Scalar(low_H, low_S, low_V), Scalar(high_H, high_S, high_V), frame_last);//задает диапозон, по которым могу менять параметры H S и V
+		inRange(Black_white_frame, Scalar(low_H, low_S, low_V), Scalar(high_H, high_S, high_V), frame_last);
 		
 
 
