@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include<unistd.h>
 #include <iostream>
 #include <ctime>
 #include <iomanip>
@@ -42,7 +41,6 @@ double** Inicialise_Matrix(int N, int flag=1)
 			for(int j=0; j<N; j++)
 				{
 					matrix[i][j]=z++;
-					//z++;
 				}
 		}
     }
@@ -53,7 +51,6 @@ void Cast_to_non_zero_element(int N, int zero_el_current_matrix, double**& matri
 {
 	bool flag = false;
 	double temp;
-	int e;
 	if(matrix[zero_el_current_matrix][zero_el_current_matrix]!=0)
 		return;
 	else
@@ -79,7 +76,8 @@ void Cast_to_non_zero_element(int N, int zero_el_current_matrix, double**& matri
 			cout<<"!!!    Degenerate matrix    !!!\n";
 			Print_matrix(N, matrix);
 			cout<<endl<<"!!!    Determinant = 0   !!!"<<endl;
-			MPI_Abort(MPI_COMM_WORLD, e);
+			int nothing;
+			MPI_Abort(MPI_COMM_WORLD, nothing);
 		}
 			
 	}
@@ -219,5 +217,4 @@ int main(int argc, char* argv[])
     Free_matrix(parent_matrix);
 
 	MPI_Finalize();
-
 }
