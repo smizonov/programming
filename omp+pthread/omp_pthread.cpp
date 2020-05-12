@@ -153,4 +153,7 @@ int main(int argc, char* argv[])
 	Print_matrix(dim_matrix, matrix2);
 	cout<<"\nMatrix C = A + B \n";
 	Print_matrix(dim_matrix, matrix_answer);
+	Free_matrix(matrix1);
+	Free_matrix(matrix2);
+	Free_matrix(matrix_answer);
 }
