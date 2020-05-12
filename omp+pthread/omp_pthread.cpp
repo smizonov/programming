@@ -9,7 +9,7 @@ int** Inicialise_Matrix(int N);
 void Free_matrix(double**& matrix);
 void Print_matrix(int N, double**& matrix);
 void omp_calculation1(int dim_matrix, int count_proc, int**& matrix1, int**& matrix2 , int**& matrix_answer);
-void pthread_calculation(int dim_matrix, int count_proc, int**& matrix1, int**& matrix2 , int**& matrix_answer);
+void *pthread_calculation(void *arg);
 
 struct struct_matrix
 {
@@ -79,17 +79,12 @@ void omp_calculation1(int dim_matrix, int count_proc, int**& matrix1, int**& mat
 
 void *pthread_calculation(void *arg)
 {
-
-
 	struct struct_matrix temp = *(struct struct_matrix *)arg;
 	for (int i=temp.i_proc; i<temp.dim_matrix; i+=temp.count_proc)
 	{
 		for (int j=0;j<temp.dim_matrix; j++)
 			temp.matrix_answer[i][j]=temp.matrix1[i][j]+temp.matrix2[i][j];
 	}
-	
-	//Print_matrix(temp.dim_matrix, temp.matrix_answer);
-
 }
 
 
@@ -123,11 +118,6 @@ int main(int argc, char* argv[])
 		pthread_t threads[dim_matrix];
 		struct_matrix *matrix= new struct struct_matrix[count_proc];
 
-
-
-		//cout<<"\n"<<(matrix->A[1]);
-        int j=1;
-        j++;
         start = omp_get_wtime();
         for(int i=0; i<count_proc; i++)
         {
@@ -145,7 +135,6 @@ int main(int argc, char* argv[])
         }
 		end = omp_get_wtime();
         cout<<"Time of calculations = "<<end - start<<" c \n";
-		//pthread_calculation1(dim_matrix, count_proc, matrix1, matrix2, matrix_answer);
 	}
 	cout<<"\nMatrix A \n";
 	Print_matrix(dim_matrix, matrix1);
