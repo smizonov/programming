@@ -1,0 +1,5 @@
+g++ -g chat_client.c chat_clnt.c chat_xdr.c -o chat_client
+./chat_client localhost
+
+g++ -g chat_server.c chat_svc.c chat_xdr.c  -lsqlite3 -o chat_server
+./chat_server
